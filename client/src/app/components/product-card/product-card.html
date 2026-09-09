@@ -1,0 +1,11 @@
+<div class="product-card">
+    @if (isNew()) {
+        <span class="badge-new">NYHET</span>
+    }
+            <img [src]="product().imageUrl" [alt]="product().name">
+            <button class="favorite-icon" aria-label="Lägg till favorit">
+                <svg lucideHeart></svg>
+            </button>
+            <p class="product-price">{{ product().price }},95KR</p>
+            <p class="product-name">{{ product().name }}</p>
+        </div>

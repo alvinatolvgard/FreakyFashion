@@ -1,0 +1,27 @@
+meta {
+  name: add product
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/products
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Mockajacka",
+    "price": 1299,
+    "imageUrl": "/images/chocolate-brown-jacket.png",
+    "details": "Chokladbrun mockajacka i sueded material.\n- Mjukt syntet- eller äkta mockamaterial\n- Rak, avslappnad passform\n- Knäppning fram med knappar\n- Längd från axel ca 60 cm i strl S\nEn klassisk höstjacka som funkar till det mesta.",
+    "sku": "SUE006",
+    "publishedDate": "2026-08-27"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,27 @@
+meta {
+  name: update product
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:3000/api/products/3
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Ullkappa",
+    "price": 1499,
+    "imageUrl": "/images/long-oversized-chocolate-brown-wool-coat.png",
+    "details": "Lång oversized kappa i chokladbrun ull.\n- Ullblandat material med varm, tung känsla\n- Oversized passform med plats för tjocka lager under\n- Dold knäppning fram\n- Längd från axel ca 110 cm i strl S\nEn statement-kappa för hela hösten.",
+    "sku": "WOO003",
+    "publishedDate": "2026-08-27"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

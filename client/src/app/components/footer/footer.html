@@ -1,0 +1,52 @@
+<footer class="footer">
+    <div class="footer-top">
+        <p><svg lucideSend></svg>SNABB LEVERANS</p>
+        <p><svg lucidePackageOpen></svg>FRI FRAKT ÖVER 799KR</p>
+        <p><svg lucidePackage></svg>14 DAGARS RETURRÄTT</p>
+        <p><svg lucideCoins></svg>SÄKER BETALNING</p>
+    </div>
+
+    <div class="footer-main">
+        <div class="footer-column">
+            <button class="footer-heading" (click)="toggleColumn('kundservice')">
+                KUNDSERVICE
+                <svg lucideChevronDown [class.rotated]="openColumn() === 'kundservice'"></svg>
+            </button>
+            <ul [class.open]="openColumn() === 'kundservice'">
+                <li><a href="#">Returnera</a></li>
+                <li><a href="#">Frakt & leverans</a></li>
+                <li><a href="#">Kontakta oss</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <button class="footer-heading" (click)="toggleColumn('omoss')">
+                OM OSS
+                <svg lucideChevronDown [class.rotated]="openColumn() === 'omoss'"></svg>
+            </button>
+            <ul [class.open]="openColumn() === 'omoss'">
+                <li><a href="#">Vår historia</a></li>
+                <li><a href="#">Hållbarhet</a></li>
+                <li><a href="#">Jobba hos oss</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <button class="footer-heading" (click)="toggleColumn('foljoss')">
+                FÖLJ OSS
+                <svg lucideChevronDown [class.rotated]="openColumn() === 'foljoss'"></svg>
+            </button>
+            <ul [class.open]="openColumn() === 'foljoss'">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">TikTok</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Upphovsrätt © 2026, Freaky fashion. Alla rättigheter förbehållna. Se våra användarvillkor och integritetspolicy.</p>
+    </div>
+
+</footer>
