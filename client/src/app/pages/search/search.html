@@ -1,0 +1,13 @@
+<section class="search-results">
+    <h1>Sökresultat för "{{ searchTerm() }}"</h1>
+
+    @if (products().length === 0) {
+        <p>Inga produkter hittades!</p>
+    } @else {
+        <div class="product-grid">
+            @for (product of products(); track product.id) {
+                <app-product-card [product]="product"></app-product-card>
+            }
+        </div>
+    }
+</section>

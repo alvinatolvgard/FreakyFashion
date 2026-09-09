@@ -16,7 +16,11 @@ export class Product {
     private http = inject(HttpClient);
     private apiUrl = 'http://localhost:3000/api/products';
 
-    getProducts() {
-        return this.http.get<ProductData[]>(this.apiUrl);
+    getProducts(search?: string) {
+        let url = this.apiUrl;
+        if (search) {
+            url += `?search=${encodeURIComponent(search)}`;
+        }
+        return this.http.get<ProductData[]>(url);
     }
 }

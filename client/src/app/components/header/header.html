@@ -4,8 +4,10 @@
 
 
         <div class="searchbar">
-            <input type="text" placeholder="Vad letar du efter?">
-            <button class="search-icon" aria-label="Sök"><svg lucideSearch></svg></button>
+            <input type="text" placeholder="Vad letar du efter?" 
+            [(ngModel)]="searchInput"
+            (keyup.enter)="onSearch()">
+            <button class="search-icon" aria-label="Sök" (click)="onSearch()"><svg lucideSearch></svg></button>
         </div>
 
         <nav class="header-icons">
