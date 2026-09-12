@@ -1,0 +1,21 @@
+.search-results p {
+    font-family: var(--font-main);
+}
+
+.search-results h1 {
+    font-family: var(--font-main);
+    font-size: var(--font-size-lg);
+}
+
+.search-results-count {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: var(--spacing-md);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}

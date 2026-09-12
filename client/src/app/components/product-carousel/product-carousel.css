@@ -1,0 +1,40 @@
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm);
+}
+
+.carousel-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-news, .product-shop-here {
+    font-family: var(--font-main);
+}
+
+.product-news {
+    font-weight: var(--weight-medium);
+}
+.product-shop-here {
+    font-size: var(--font-size-xs);
+}
+
+.carousel-arrows {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.arrow-back, .arrow-more {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.product-carousel {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}

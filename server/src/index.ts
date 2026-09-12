@@ -23,12 +23,23 @@ app.use(express.json());
 app.get('/api/products', (req, res) => {
     const search = req.query.search as string | undefined;
 
-    if (search) {
+    if (search && search.trim().length >= 2) {
         const products = db.prepare('SELECT * FROM products WHERE name LIKE ?').all(`%${search}%`);
         res.json(products);
     } else {
         const products = db.prepare('SELECT * FROM products').all()
         res.json(products);
+    }
+});
+
+app.get('/api/products/:id', (req, res) => {
+    const { id } = req.params;
+    const product = db.prepare('SELECT * FROM products WHERE id = ?').get(id);
+
+    if (product) {
+        res.json(product);
+    } else {
+        res.status(404).json({error: 'Produkten hittades inte'});
     }
 });
 
@@ -44,6 +55,12 @@ app.put('/api/products/:id', (req, res) => {
     db.prepare('UPDATE products SET name = ?, price = ?, imageUrl = ?, details = ?, sku = ?, publishedDate = ? WHERE id = ?')
         .run(name, price, imageUrl, details, sku, publishedDate, id);
     res.json({ id, name, price, imageUrl, details, sku, publishedDate });
+});
+
+app.delete('/api/products/:id', (req, res) => {
+    const {id} = req.params;
+    db.prepare('DELETE FROM products WHERE id = ?').run(id);
+    res.status(204).send();
 });
 
 const PORT = 3000;

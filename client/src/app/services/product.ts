@@ -23,4 +23,16 @@ export class Product {
         }
         return this.http.get<ProductData[]>(url);
     }
+
+    getProductById(id: string) {
+        return this.http.get<ProductData>(`${this.apiUrl}/${id}`);
+    }
+
+    deleteProduct(id: number) {
+        return this.http.delete(`${this.apiUrl}/${id}`);
+    }
+
+    createProduct(product: Omit<ProductData, 'id'>) {
+    return this.http.post<ProductData>(this.apiUrl, product);
+    }
 }

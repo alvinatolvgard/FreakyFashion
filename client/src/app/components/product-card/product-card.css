@@ -1,7 +1,10 @@
 .product-card {
+    display: block;
     flex: 0 0 auto;
     width: 200px;
     position: relative;
+    text-decoration: none;
+    color: inherit;
 }
 
 .product-card img {
@@ -23,6 +26,7 @@
     font-family: var(--font-main);
     font-size: var(--font-size-xs);
     padding: var(--spacing-sm) 0 0 var(--spacing-sm);
+
 }
 
 .badge-new {

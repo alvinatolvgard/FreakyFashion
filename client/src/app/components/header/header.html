@@ -2,7 +2,6 @@
     <div class="header-top">
         <a routerLink="/" class="logo">FREAKY<br />FASHION</a>
 
-
         <div class="searchbar">
             <input type="text" placeholder="Vad letar du efter?" 
             [(ngModel)]="searchInput"
@@ -11,15 +10,27 @@
         </div>
 
         <nav class="header-icons">
-            <button class="search-icon-mobile" aria-label="Sök"><svg lucideSearch></svg></button>
+            <button class="search-icon-mobile" aria-label="Sök" (click)="toggleMobileSearch()"><svg lucideSearch></svg></button>
             <a href="#" aria-label="Favoriter"><svg lucideHeart></svg></a>
             <a href="#" aria-label="Profil"><svg lucideUser></svg></a>
-            <a href="#" aria-label="Kundvagn"><svg lucideShoppingCart></svg></a>
-            <button class="hamburger" aria-label="Meny"><svg lucideMenu></svg></button>
+            <a routerLink="/varukorg" aria-label="Kundvagn"><svg lucideShoppingCart></svg></a>
+            <button class="hamburger" aria-label="Meny" (click)="toggleMenu()"><svg lucideMenu></svg></button>
         </nav>
     </div>
 
-    <nav class="header-nav">
+    @if (mobileSearchOpen()) {
+            <div class="mobile-search-bar">
+                <input type="text" placeholder="Vad letar du efter?"
+                [(ngModel)]="searchInput"
+                (keyup.enter)="onSearch()"
+                >
+                <button type="button" aria-label="Sök" (click)="onSearch()">
+                    <svg lucideSearch></svg>
+                </button>
+            </div>
+        }
+
+    <nav class="header-nav" [class.open]="mobileMenuOpen()" (click)="mobileMenuOpen.set(false)">
         <a routerLink="/kategori/nyheter">Nyheter</a>
         <a routerLink="/kategori/höst2026">Höst 2026</a>
         <a routerLink="/kategori/tröjor">Tröjor</a>

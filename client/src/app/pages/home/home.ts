@@ -1,10 +1,9 @@
-import { Component, signal, inject, viewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { Product, ProductData } from '../../services/product';
-import { ProductCard } from '../../components/product-card/product-card';
-import { LucideArrowLeft, LucideArrowRight } from '@lucide/angular';
+import { ProductCarousel } from '../../components/product-carousel/product-carousel';
 
 @Component({
-  imports: [ ProductCard, LucideArrowLeft, LucideArrowRight  ],
+  imports: [ ProductCarousel ],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
@@ -12,19 +11,18 @@ import { LucideArrowLeft, LucideArrowRight } from '@lucide/angular';
 export class Home implements OnInit {
   private productService = inject(Product);
   products = signal<ProductData[]>([]);
-  carousel = viewChild<ElementRef<HTMLElement>>('carousel');
 
   ngOnInit() {
     this.productService.getProducts().subscribe(data => {
-      this.products.set(data);
+      const newProducts = data.filter(product => {
+        const published = new Date(product.publishedDate);
+        const now = new Date();
+        const diffInDays = (now.getTime() - published.getTime()) / (1000 * 60 * 60 * 2 * 24);
+        return diffInDays <= 7;
+      });
+      this.products.set(newProducts.slice(0, 8));
     });
   }
 
-  scrollLeft() {
-    this.carousel()?.nativeElement.scrollBy({ left: -300, behavior: 'smooth'});
-  }
-
-  scrollRight() {
-    this.carousel()?.nativeElement.scrollBy({ left: 300, behavior: 'smooth'});
-  }
+  
 }

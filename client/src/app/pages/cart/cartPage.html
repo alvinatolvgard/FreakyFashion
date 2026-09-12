@@ -1,0 +1,52 @@
+<section class="cart-page">
+    <h1>Varukorg</h1>
+
+    @if (cartService.items().length === 0) {
+    <p>Din varukorg är tom</p>
+    <a routerLink="/">Fortsätt handla</a>
+    } @else {
+    <div class="cart-layout">
+        <div class="cart-items">
+            @for (item of cartService.items(); track item) {
+            <div class="cart-item">
+                <img [src]="item.product.imageUrl" [alt]="item.product.name">
+
+                <div class="cart-item-info">
+                    <p class="item-price">{{ item.product.price }},95kr</p>
+                    <p class="item-name">{{ item.product.name }}</p>
+                    <p class="item-size">{{ item.size }}</p>
+
+                    <div class="quantity-controls">
+                
+                        <div class="de-increse-buttons">
+                            <button (click)="decreaseQuantity(item)" aria-label="Minska antal">-</button>
+                            <span>{{ item.quantity }}</span>
+                            <button (click)="increseQuantity(item)" aria-label="Öka antal">+</button>
+                        </div>
+                        <button class="remove-button" (click)="removeItem(item)" aria-label="Ta bort">
+                            <svg lucideTrash2></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Beställningsvärde</span>
+                <span>{{ cartService.subtotal() }},95 kr</span>
+            </div>
+            <div class="summary-row">
+                <span>Beräknad leveransavgift</span>
+                <span>{{ shipping }} kr</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>SUMMA</span>
+                <span>{{ total }} kr</span>
+            </div>
+            <button class="checkout-button" routerLink="/kassa">Fortsätt till kassan</button>
+        </div>
+    </div>
+    }
+</section>

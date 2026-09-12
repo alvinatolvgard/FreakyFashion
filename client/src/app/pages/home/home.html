@@ -20,31 +20,11 @@
         <span>Bästsäljare</span>
     </a>
 
+
     <a routerLink="/kategori/host2026" class="category-card">
         <img src="/hero-host2026.png" alt="Höst 2026">
         <span>Höst 2026</span>
     </a>
 </section>
 
-<section class="product-card-section">
-    <div class="carousel-header">
-        <div class="carousel-title">
-            <p class="product-news">NYHETER</p>
-            <p class="product-shop-here">SHOPPA HÄR</p>
-        </div>
-        <div class="carousel-arrows">
-            <button class="arrow-back" aria-label="Tillbaka-pil" (click)="scrollLeft()">
-                <svg lucideArrowLeft></svg>
-            </button>
-            <button class="arrow-more" aria-label="Mer-pil" (click)="scrollRight()">
-                <svg lucideArrowRight></svg>
-            </button>
-        </div>
-    </div>
-
-    <div class="product-carousel" #carousel>
-        @for (product of products(); track product.id) {
-            <app-product-card [product]="product"></app-product-card>
-        }
-    </div>
-</section>
+<app-product-carousel [products]="products()"></app-product-carousel>

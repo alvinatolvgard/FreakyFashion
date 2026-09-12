@@ -1,9 +1,10 @@
 import { Component, input, computed } from '@angular/core';
 import { ProductData } from '../../services/product';
+import { Router, RouterLink } from '@angular/router';
 import { LucideHeart } from '@lucide/angular';
 
 @Component({
-  imports: [ LucideHeart ],
+  imports: [ LucideHeart, RouterLink ],
   selector: 'app-product-card',
   styleUrl: './product-card.css',
   templateUrl: './product-card.html',

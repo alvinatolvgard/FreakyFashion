@@ -1,0 +1,29 @@
+<section class="admin-page">
+    <h1>Produkter</h1>
+    <a routerLink="/admin/produkter/ny" class="new-product-button">Ny produkt</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>SKU</th>
+                <th>Pris</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (product of products(); track product.id) {
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.sku }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <button (click)="deleteProduct(product.id)" aria-label="Ta bort">
+                        <svg lucideTrash2></svg>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

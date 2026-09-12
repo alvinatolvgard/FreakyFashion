@@ -1,0 +1,22 @@
+<section class="product-card-section">
+    <div class="carousel-header">
+        <div class="carousel-title">
+            <p class="product-news">{{ title()}}</p>
+            <p class="product-shop-here">{{ subtitle() }}</p>
+        </div>
+        <div class="carousel-arrows">
+            <button class="arrow-back" aria-label="Tillbaka-pil" (click)="scrollLeft()">
+                <svg lucideArrowLeft></svg>
+            </button>
+            <button class="arrow-more" aria-label="Mer-pil" (click)="scrollRight()">
+                <svg lucideArrowRight></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="product-carousel" #carousel>
+        @for (product of products(); track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+        }
+    </div>
+</section>

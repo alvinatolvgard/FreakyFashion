@@ -1,0 +1,47 @@
+<a routerLink="/varukorg"><svg lucideArrowLeft></svg>Tillbaka till varukorgen</a>
+
+<section class="checkout-page">
+    <div class="checkout-form">
+        <h1>KASSA</h1>
+        <h2>LEVERANS</h2>
+
+        <form (ngSubmit)="completeOrder()">
+            <label>Förnamn
+                <input type="text" [(ngModel)]="formData.firstName" name="firstName" required>
+            </label>
+
+            <label>Efternamn
+                <input type="text" [(ngModel)]="formData.lastName" name="lastName" required>
+            </label>
+
+            <label>Adress
+                <input type="text" [(ngModel)]="formData.adress" name="adress" required>
+            </label>
+
+            <label>Postnummer
+                <input type="text" [(ngModel)]="formData.postalCode" name="postalCode" required>
+            </label>
+
+            <label>Ort
+                <input type="text" [(ngModel)]="formData.city" name="city" required>
+            </label>
+
+            <div class="checkout-summary">
+                <div class="summary-row">
+                    <span>Beställningsvärde</span>
+                    <span>{{ cartService.subtotal() }},95 kr</span>
+                </div>
+                <div class="summary-row">
+                    <span>Beräknad leveransavgift</span>
+                    <span>{{ shipping }} kr</span>
+                </div>
+                <div class="summary-row">
+                    <span>SUMMA</span>
+                    <span>{{ total }} kr</span>
+                </div>
+
+                <button type="submit" class="checkout-button">Slutför köp</button>
+            </div>
+        </form>
+    </div>
+</section>

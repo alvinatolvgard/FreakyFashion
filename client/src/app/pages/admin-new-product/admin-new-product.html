@@ -1,0 +1,31 @@
+<section class="admin-page">
+    <h1>Ny produkt</h1>
+
+    <form (ngSubmit)="onSubmit()">
+        <label>Namn
+            <input type="text" [(ngModel)]="formData.name" name="name" maxlength="25" required>
+        </label>
+
+        <label>beskrivning
+            <textarea [(ngModel)]="formData.details" name="details" placeholder="Ange beskrivning"></textarea>
+        </label>
+
+        <label>Bild
+            <input type="text" [(ngModel)]="formData.imageUrl" name="imageUrl" required placeholder="Ange URL">
+        </label>
+
+        <label>SKU
+            <input type="text" [(ngModel)]="formData.sku" name="sku" pattern="[A-Z]{3}[0-9]{3}" required placeholder="Ange SKU" title="Format: ABC123">
+        </label>
+
+        <label>Pris
+            <input type="number" [(ngModel)]="formData.price" name="price" required>
+        </label>
+
+        <label>Publiseringsdatum
+            <input type="date" [(ngModel)]="formData.publishedDate" name="publishedDate" required>
+        </label>
+
+        <button type="submit">Lägg till</button>
+    </form>
+</section>

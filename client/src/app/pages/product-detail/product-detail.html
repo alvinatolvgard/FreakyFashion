@@ -1,0 +1,76 @@
+@if (product(); as p) {
+<section class="product-detail">
+    <div class="product-main">
+        <img class="product-image" [src]="p.imageUrl" [alt]="p.name">
+
+        <div class="product-info">
+            <p class="product-price">{{ p.price }},95kr</p>
+            <p class="product-name">{{ p.name }}</p>
+
+            <div class="size-selector">
+                <button class="size-option" [class.selected]="selectedSize() ==='XS'"
+                    (click)="selectSize('XS')">XS</button>
+                <button class="size-option" [class.selected]="selectedSize() ==='S'"
+                    (click)="selectSize('S')">S</button>
+                <button class="size-option" [class.selected]="selectedSize() ==='M'"
+                    (click)="selectSize('M')">M</button>
+                <button class="size-option" [class.selected]="selectedSize() ==='L'"
+                    (click)="selectSize('L')">L</button>
+                <button class="size-option" [class.selected]="selectedSize() ==='XL'"
+                    (click)="selectSize('XL')">XL</button>
+            </div>
+
+            <button class="add-to-cart" [disabled]="!selectedSize()" (click)="addToCart()">Lägg i varukorgen</button>
+
+            <div class="delivery-info">
+                <div class="delivery-item">
+                    <svg lucidePackage></svg>
+                    <span>Fri frakt från 799 kr</span>
+                </div>
+                <div class="delivery-item">
+                    <svg lucideTruck></svg>
+                    <span>1-5 leveransdagar</span>
+                </div>
+                <div class="delivery-item">
+                    <svg lucideCreditCard></svg>
+                    <span>Smidiga betalningar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-tabs">
+        <div class="tab-headings">
+            <button class="accordion-heading" [class.active]="openSection() === 'beskrivning'"
+                (click)="toggleSection('beskrivning')">
+                Produktbeskrivning
+                <span class="toggle-icon">{{ openSection() === 'beskrivning' ? '-' : '+' }}</span>
+            </button>
+            <button class="accordion-heading" [class.active]="openSection() === 'detaljer'"
+                (click)="toggleSection('detaljer')">
+                Produktdetaljer
+                <span class="toggle-icon">{{ openSection() === 'detaljer' ? '-' : '+' }}</span>
+            </button>
+        </div>
+
+        @if (openSection() === 'beskrivning') {
+        <div class="accordion-content">
+            <p>{{ descriptionIntro(p) }}</p>
+            <ul>
+                @for (bullet of descriptionBullets(p); track bullet) {
+                <li>{{ bullet }}</li>
+                }
+            </ul>
+        </div>
+        }
+
+        @if (openSection() === 'detaljer') {
+        <div class="accordion-content">
+            <p>{{ p.sku }}</p>
+        </div>
+        }
+    </div>
+</section>
+}
+
+<app-product-carousel [products]="similarProducts()" title="LIKNANDE PRODUKTER" subtitle=""></app-product-carousel>
