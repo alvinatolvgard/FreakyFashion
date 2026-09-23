@@ -1,3 +1,7 @@
+.product-card-section {
+    margin: var(--spacing-sm);
+}
+
 .carousel-header {
     display: flex;
     justify-content: space-between;

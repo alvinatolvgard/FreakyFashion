@@ -20,7 +20,14 @@
                     (click)="selectSize('XL')">XL</button>
             </div>
 
-            <button class="add-to-cart" [disabled]="!selectedSize()" (click)="addToCart()">Lägg i varukorgen</button>
+            <button class="add-to-cart" [disabled]="!selectedSize() || justAdded()" [class.added]="justAdded()"
+                (click)="addToCart()">
+                @if (justAdded()) {
+                Lagt i varukorgen
+                } @else {
+                Lägg i varukorgen
+                }
+            </button>
 
             <div class="delivery-info">
                 <div class="delivery-item">
@@ -40,35 +47,36 @@
     </div>
 
     <div class="product-tabs">
-        <div class="tab-headings">
-            <button class="accordion-heading" [class.active]="openSection() === 'beskrivning'"
+        <div class="accordion-section">
+            <button class="accordion-heading" heading-beskrivning [class.active]="openSection() === 'beskrivning'"
                 (click)="toggleSection('beskrivning')">
                 Produktbeskrivning
                 <span class="toggle-icon">{{ openSection() === 'beskrivning' ? '-' : '+' }}</span>
             </button>
-            <button class="accordion-heading" [class.active]="openSection() === 'detaljer'"
+            @if (openSection() === 'beskrivning') {
+            <div class="accordion-content content-beskrivning">
+                <p>{{ descriptionIntro(p) }}</p>
+                <ul>
+                    @for (bullet of descriptionBullets(p); track bullet) {
+                    <li>{{ bullet }}</li>
+                    }
+                </ul>
+            </div>
+            }
+        </div>
+
+        <div class="accordion-section">
+            <button class="accordion-heading heading-detaljer" [class.active]="openSection() === 'detaljer'"
                 (click)="toggleSection('detaljer')">
                 Produktdetaljer
                 <span class="toggle-icon">{{ openSection() === 'detaljer' ? '-' : '+' }}</span>
             </button>
+            @if (openSection() === 'detaljer') {
+            <div class="accordion-content content-detaljer">
+                <p>{{ p.sku }}</p>
+            </div>
+            }
         </div>
-
-        @if (openSection() === 'beskrivning') {
-        <div class="accordion-content">
-            <p>{{ descriptionIntro(p) }}</p>
-            <ul>
-                @for (bullet of descriptionBullets(p); track bullet) {
-                <li>{{ bullet }}</li>
-                }
-            </ul>
-        </div>
-        }
-
-        @if (openSection() === 'detaljer') {
-        <div class="accordion-content">
-            <p>{{ p.sku }}</p>
-        </div>
-        }
     </div>
 </section>
 }

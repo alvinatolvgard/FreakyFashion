@@ -6,7 +6,7 @@ import { ProductCarousel } from '../../components/product-carousel/product-carou
 import { LucidePackage, LucideTruck, LucideCreditCard } from '@lucide/angular'
 
 @Component({
-  imports: [ ProductCarousel, LucidePackage, LucideTruck, LucideCreditCard ],
+  imports: [ProductCarousel, LucidePackage, LucideTruck, LucideCreditCard],
   selector: 'app-product-detail',
   styleUrl: './product-detail.css',
   templateUrl: './product-detail.html',
@@ -20,6 +20,7 @@ export class ProductDetail implements OnInit {
   openSection = signal<string | null>('beskrivning');
   similarProducts = signal<ProductData[]>([]);
   selectedSize = signal<string | null>(null);
+  justAdded = signal(false);
 
   selectSize(size: string) {
     this.selectedSize.set(size);
@@ -34,21 +35,39 @@ export class ProductDetail implements OnInit {
     }
 
     this.cartService.addToCart(currentProduct, size);
+    this.justAdded.set(true);
+
+    setTimeout(() => {
+      this.justAdded.set(false);
+    }, 2000);
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id'];
+      const slug = params['id'];
       this.selectedSize.set(null);
-      this.productService.getProductById(id).subscribe(data => {
-        this.product.set(data);
-      });
 
       this.productService.getProducts().subscribe(allProducts => {
-        const others = allProducts.filter(p => p.id !== Number(id));
-        this.similarProducts.set(others.slice(0, 6));
+        const match = allProducts.find(p => this.slugify(p.name, p.sku) === slug);
+        this.product.set(match ?? null);
+
+        if (match) {
+          const others = allProducts.filter(p => p.id !== match.id);
+          this.similarProducts.set(others.slice(0, 6));
+        }
       });
     });
+  }
+
+  slugify(name: string, sku: string): string {
+    const base = name
+      .toLowerCase()
+      .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+      const suffix = sku.replace(/[^0-9]/g, '');
+      return `${base}-${suffix}`;
   }
 
   toggleSection(name: string) {
@@ -61,10 +80,10 @@ export class ProductDetail implements OnInit {
 
   descriptionBullets(p: ProductData): string[] {
     return p.details
-    .split('\n')
-    .slice(1)
-    .filter(line => line.trim().startsWith('-'))
-    .map(line => line.replace(/^-\s*/,''));
+      .split('\n')
+      .slice(1)
+      .filter(line => line.trim().startsWith('-'))
+      .map(line => line.replace(/^-\s*/, ''));
   }
 
 }

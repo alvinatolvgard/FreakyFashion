@@ -39,14 +39,22 @@ app.get('/api/products/:id', (req, res) => {
     if (product) {
         res.json(product);
     } else {
-        res.status(404).json({error: 'Produkten hittades inte'});
+        res.status(404).json({ error: 'Produkten hittades inte' });
     }
 });
 
 app.post('/api/products', (req, res) => {
     const { name, price, imageUrl, details, sku, publishedDate } = req.body;
-    const result = db.prepare('INSERT INTO products (name, price, imageUrl, details, sku, publishedDate) VALUES (?, ?, ?, ?, ?, ?)').run(name, price, imageUrl, details, sku, publishedDate);
-    res.status(201).json({ id: result.lastInsertRowid, name, price, imageUrl, details, sku, publishedDate });
+    try {
+        const result = db.prepare('INSERT INTO products (name, price, imageUrl, details, sku, publishedDate) VALUES (?, ?, ?, ?, ?, ?)').run(name, price, imageUrl, details, sku, publishedDate);
+        res.status(201).json({ id: result.lastInsertRowid, name, price, imageUrl, details, sku, publishedDate });
+    } catch (err: any) {
+        if (err.message.includes('UNIQUE constraint failed')) {
+            res.status(409).json({ error: 'SKU finns redan' });
+        } else {
+            res.status(500).json({ error: 'Något gick fel' });
+        }
+    }
 });
 
 app.put('/api/products/:id', (req, res) => {
@@ -58,7 +66,7 @@ app.put('/api/products/:id', (req, res) => {
 });
 
 app.delete('/api/products/:id', (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     db.prepare('DELETE FROM products WHERE id = ?').run(id);
     res.status(204).send();
 });

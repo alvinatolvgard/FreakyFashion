@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../services/product';
@@ -12,6 +12,8 @@ import { Product } from '../../services/product';
 export class AdminNewProduct {
   private productService = inject(Product);
   private router = inject(Router);
+  errorMessage = signal('');
+
 
   formData = {
     name: '',
@@ -23,8 +25,14 @@ export class AdminNewProduct {
   };
 
   onSubmit() {
-    this.productService.createProduct(this.formData).subscribe(() => {
-      this.router.navigate(['/admin/produkter']);
-    });
+    this.errorMessage.set('');
+    this.productService.createProduct(this.formData).subscribe({
+      next: () => {
+        this.router.navigate(['/admin/produkter']);
+      },
+      error: (err) => {
+        this.errorMessage.set(err.error?.error ?? 'Något gick fel, försök igen.')
+      }
+    })
   }
 }

@@ -6,7 +6,7 @@
             <input type="text" [(ngModel)]="formData.name" name="name" maxlength="25" required>
         </label>
 
-        <label>beskrivning
+        <label>Beskrivning
             <textarea [(ngModel)]="formData.details" name="details" placeholder="Ange beskrivning"></textarea>
         </label>
 
@@ -28,4 +28,8 @@
 
         <button type="submit">Lägg till</button>
     </form>
+
+    @if (errorMessage()) {
+        <p class="error">{{ errorMessage() }}</p>
+    }
 </section>

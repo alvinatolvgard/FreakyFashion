@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LucideHeart } from '@lucide/angular';
 
 @Component({
-  imports: [ LucideHeart, RouterLink ],
+  imports: [LucideHeart, RouterLink],
   selector: 'app-product-card',
   styleUrl: './product-card.css',
   templateUrl: './product-card.html',
@@ -13,10 +13,21 @@ export class ProductCard {
   product = input.required<ProductData>();
 
   isNew = computed(() => {
-  const published = new Date(this.product().publishedDate);
-  const now = new Date();
-  const diffInDays = (now.getTime() - published.getTime()) / (1000 * 60 * 60 * 24);
-  return diffInDays <= 7;
-})
+    const published = new Date(this.product().publishedDate);
+    const now = new Date();
+    const diffInDays = (now.getTime() - published.getTime()) / (1000 * 60 * 60 * 24);
+    return diffInDays <= 7;
+  });
+
+  slugify(name: string, sku: string): string {
+    const base = name
+      .toLowerCase()
+      .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+      const suffix = sku.replace(/[^0-9]/g, '');
+      return `${base}-${suffix}`;
+  }
 }
 

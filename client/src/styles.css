@@ -3,7 +3,16 @@
     padding: 0;
 }
 
+
 :root {
+
+    /* --- FÄRGVAL ---*/
+    --color-bg: #FAF7F2;
+    --color-surface: #EDE4D8;
+    --color-accent: #D8C9B4;
+    --color-text-muted: #8C7B68;
+    --color-text: #2B2320;
+
     /* TYPSNITT */
     --font-main: 'Montserrat', sans-serif;
     --weight-light: 300;

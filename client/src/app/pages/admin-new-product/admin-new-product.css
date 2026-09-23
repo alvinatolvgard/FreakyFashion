@@ -1,0 +1,47 @@
+.admin-page {
+    font-family: var(--font-main);
+    margin: var(--spacing-md);
+}
+
+.admin-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-page label {
+    margin-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    font-weight: var(--weight-medium);
+}
+
+
+.admin-page button {
+    width: 30%;
+    padding: var(--spacing-sm);
+    background: var(--color-accent);
+    border: none;
+    color: white;
+    font-family: var(--font-main);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.admin-page input,
+    .admin-page textarea {
+        font-family: var(--font-main);
+        padding: var(--spacing-sm);
+    }
+
+@media (min-width: 768px) {
+
+    .admin-page input,
+    .admin-page textarea {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .admin-page button {
+    width: 10%;
+    }
+}

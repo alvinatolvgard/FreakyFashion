@@ -10,7 +10,7 @@
 
 .logo {
     text-decoration: none;
-    color: inherit;
+    color: var(--color-text);
     font-family: var(--font-main);
     font-size: var(--font-size-md);
     padding: var(--spacing-xs);
@@ -23,13 +23,13 @@
 }
 
 .header-icons a {
-    color: inherit;
+    color: var(--color-text);
     text-decoration: none;
 }
 
 .header-nav a {
     text-decoration: none;
-    color: inherit;
+        color: var(--color-text);
     cursor: pointer;
 }
 
@@ -43,7 +43,31 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    
+
+}
+
+.cart-link {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--color-accent);
+    box-sizing: border-box;
+    font-family: var(--font-main);
+    color: var(--color-bg);
+    line-height: 1;
+    font-size: var(--font-size-xs);
+    min-width: var(--spacing-md);
+    height: var(--spacing-md);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .header-nav {
@@ -143,5 +167,3 @@
         display: none;
     }
 }
-
-

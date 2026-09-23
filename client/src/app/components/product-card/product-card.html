@@ -1,4 +1,4 @@
-<a [routerLink]="['/produkt', product().id]" class="product-card">
+<a [routerLink]="['/produkt', slugify(product().name, product().sku)]" class="product-card">
 @if (isNew()) {
 <span class="badge-new">NYHET</span>
 }

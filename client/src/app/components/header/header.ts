@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Cart } from '../../services/cart';
 import { LucideHeart, LucideUser, LucideShoppingCart, LucideMenu, LucideSearch } from '@lucide/angular';
 import { Router, RouterLink } from '@angular/router';
 
@@ -10,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './header.html',
 })
 export class Header {
+  cartService = inject(Cart);
   private router = inject(Router);
   searchInput = '';
   mobileSearchOpen = signal(false);

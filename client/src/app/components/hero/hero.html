@@ -1,0 +1,13 @@
+<section class="hero">
+    @for (image of desktopImages(); track image; let i = $index) {
+        <picture class="hero-image" [class.active]="i === currentIndex()">
+            <source media="(max-width: 768px)" [srcset]="mobileImages()[i]">
+            <img [src]="image" alt="Hero bild" />
+        </picture>
+    }
+
+    <div class="hero-overlay">
+        <h1>Höst 2026</h1>
+        <a routerLink="/product" class="hero-button">Shoppa här</a>
+    </div>
+</section>
